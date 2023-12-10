@@ -54,6 +54,30 @@ func (r *MultiTenantDBResolver) AddConnector(tenantId string, connector DBConnec
 	return r
 }
 
+func (r *MultiTenantDBResolver) AddConnectors(tenantId string, connectors ...DBConnector) *MultiTenantDBResolver {
+	mu.Lock()
+	defer mu.Unlock()
+	for _, connector := range connectors {
+		r.connectors[tenantId] = connector
+		r.once[tenantId] = &sync.Once{}
+	}
+	return r
+}
+
+func (r *MultiTenantDBResolver) AddPsqlConnectors(connectors ...postgres.MultiTenantPostgresConfig) *MultiTenantDBResolver {
+	for _, connector := range connectors {
+		r.AddConnector(connector.Key, NewPostgresConnector(connector.Config))
+	}
+	return r
+}
+
+func (r *MultiTenantDBResolver) AddMsqlConnectors(connectors ...mysql.MultiTenantMysqlConfig) *MultiTenantDBResolver {
+	for _, connector := range connectors {
+		r.AddConnector(connector.Key, NewMySQLConnector(connector.Config))
+	}
+	return r
+}
+
 // GetConnector returns a database connection for a specific tenant.
 func (r *MultiTenantDBResolver) GetConnector(tenantId string) (*sql.DB, dbx.Dbx) {
 	mu.RLock()
@@ -66,8 +90,10 @@ func (r *MultiTenantDBResolver) GetConnector(tenantId string) (*sql.DB, dbx.Dbx)
 		defer mu.Unlock()
 		// Check again to avoid race condition
 		if connector, ok = r.connectors[tenantId]; !ok {
-			connector = NewPostgresConnector(*postgres.GetPostgresConfigSample()) // Fallback to default config
-			r.AddConnector(tenantId, connector)
+			message := fmt.Sprintf("No connector found for tenant %s", tenantId)
+			logger.Warnf(message)
+			s := dbx.NewDbx().SetConnected(false).SetMessage(message).SetNewInstance(false).SetPid(0).SetDebugMode(true)
+			return nil, *s
 		}
 	}
 
