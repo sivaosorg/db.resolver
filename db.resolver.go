@@ -69,8 +69,6 @@ func (r *MultiTenantDBResolver) AddConnectors(tenantId string, connectors ...DBC
 }
 
 func (r *MultiTenantDBResolver) AddPsqlConnectors(connectors ...postgres.MultiTenantPostgresConfig) *MultiTenantDBResolver {
-	r.mu.Lock()
-	defer r.mu.Unlock()
 	for _, connector := range connectors {
 		r.AddConnector(connector.Key, NewPostgresConnector(connector.Config))
 	}
@@ -78,8 +76,6 @@ func (r *MultiTenantDBResolver) AddPsqlConnectors(connectors ...postgres.MultiTe
 }
 
 func (r *MultiTenantDBResolver) AddMsqlConnectors(connectors ...mysql.MultiTenantMysqlConfig) *MultiTenantDBResolver {
-	r.mu.Lock()
-	defer r.mu.Unlock()
 	for _, connector := range connectors {
 		r.AddConnector(connector.Key, NewMySQLConnector(connector.Config))
 	}
@@ -88,9 +84,6 @@ func (r *MultiTenantDBResolver) AddMsqlConnectors(connectors ...mysql.MultiTenan
 
 // AddConnectorsFromConfig adds database connectors from configuration data.
 func (r *MultiTenantDBResolver) AddConnectorsFromConfig(configs ...interface{}) *MultiTenantDBResolver {
-	r.mu.Lock()
-	defer r.mu.Unlock()
-
 	for _, config := range configs {
 		switch c := config.(type) {
 		case postgres.MultiTenantPostgresConfig:
@@ -233,11 +226,17 @@ func (r *MultiTenantDBResolver) GetConnectorInfo(tenantId string) (DBConnector, 
 func (r *MultiTenantDBResolver) HealthCheck() map[string]bool {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
+	var wg sync.WaitGroup
 	status := make(map[string]bool, len(r.connectors))
 	for tenantId, connector := range r.connectors {
-		_, s := connector.Connect()
-		status[tenantId] = s.IsConnected
+		wg.Add(1)
+		go func(t string, c DBConnector) {
+			defer wg.Done()
+			_, s := c.Connect()
+			status[t] = s.IsConnected
+		}(tenantId, connector)
 	}
+	wg.Wait()
 	return status
 }
 
