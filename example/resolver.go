@@ -23,12 +23,17 @@ func main() {
 		SetUsername("XXXX").
 		SetDebugMode(false)
 
+	postgresConfigs := []postgres.MultiTenantPostgresConfig{
+		{Key: "postgres_tenant_1", Config: *postgres.GetPostgresConfigSample()},
+		{Key: "postgres_tenant_2", Config: *postgres.GetPostgresConfigSample()},
+	}
+
 	connector1 := dbresolver.NewPostgresConnector(*config_1)
 	connector2 := dbresolver.NewPostgresConnector(*config_2)
 
 	resolver := dbresolver.NewMultiTenantDBResolver()
 
-	resolver.AddConnector("psql_node1", connector1).AddConnector("psql_node2", connector2)
+	resolver.AddConnector("psql_node1", connector1).AddConnector("psql_node2", connector2).AddPsqlConnectors(postgresConfigs...)
 
 	_, s1 := resolver.GetConnector("psql_node1")
 
