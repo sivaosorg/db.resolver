@@ -8,18 +8,17 @@ Golang Database Resolver for Efficient Repository Management.
 
 ## Table of Contents
 
-- [DB.Resolver](#db.resolver)
+- [DB.Resolver](#dbresolver)
   - [Table of Contents](#table-of-contents)
   - [Introduction](#introduction)
   - [Prerequisites](#prerequisites)
   - [Key Features](#key-features)
-  - [Modules Support](#modules-support)
+  - [Installation](#installation)
+  - [Modules](#modules)
     - [Running Tests](#running-tests)
     - [Tidying up Modules](#tidying-up-modules)
     - [Upgrading Dependencies](#upgrading-dependencies)
     - [Cleaning Dependency Cache](#cleaning-dependency-cache)
-  - [Tools Commands](#tools-commands)
-    - [Swagger Documentation](#swagger-documentation)
 
 ## Introduction
 
@@ -44,7 +43,21 @@ Golang version v1.20
 - Middleware Integration:
   - Integrate the resolver seamlessly with popular middleware solutions for additional features such as caching, logging, and authentication. This flexibility allows you to extend the resolver's capabilities to meet the specific needs of your project.
 
-## Modules Support
+## Installation
+
+- Latest version 
+
+```bash
+go get -u github.com/sivaosorg/db.resolver@latest
+```
+
+- Use a specific version (tag)
+
+```bash
+go get github.com/sivaosorg/db.resolver@v0.0.1
+```
+
+## Modules
 
 Explain how users can interact with the various modules.
 
