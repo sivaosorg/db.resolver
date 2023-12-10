@@ -37,4 +37,9 @@ type MySQLConnector struct {
 type MultiTenantDBResolver struct {
 	connectors map[string]DBConnector
 	once       map[string]*sync.Once
+	mu         sync.RWMutex
+	dbs        map[string]struct {
+		C *sql.DB
+		S dbx.Dbx
+	}
 }
