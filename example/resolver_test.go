@@ -1,12 +1,14 @@
 package example
 
 import (
+	"testing"
+
 	dbresolver "github.com/sivaosorg/db.resolver"
 	"github.com/sivaosorg/govm/logger"
 	"github.com/sivaosorg/govm/postgres"
 )
 
-func main() {
+func TestConnections(t *testing.T) {
 	config_1 := postgres.GetPostgresConfigSample().
 		SetEnabled(true).
 		SetDatabase("your_db").

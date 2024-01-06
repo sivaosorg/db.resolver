@@ -11,7 +11,7 @@ import (
 	"github.com/sivaosorg/govm/mysql"
 	"github.com/sivaosorg/govm/postgres"
 	"github.com/sivaosorg/msqlconn"
-	"github.com/sivaosorg/postgresconn"
+	"github.com/sivaosorg/psqlconn"
 )
 
 // NewPostgresConnector creates a new PostgresConnector instance.
@@ -25,7 +25,7 @@ func NewMySQLConnector(config mysql.MysqlConfig) *MySQLConnector {
 }
 
 func (p *PostgresConnector) Connect() (*sql.DB, dbx.Dbx) {
-	psql, s := postgresconn.NewClient(p.Config)
+	psql, s := psqlconn.NewClient(p.Config)
 	if s.IsConnected {
 		return psql.GetConn().DB, s
 	}
