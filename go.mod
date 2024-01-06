@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/sivaosorg/govm v1.2.8
-	github.com/sivaosorg/mysqlconn v1.0.5
+	github.com/sivaosorg/msqlconn v1.0.7
 	github.com/sivaosorg/postgresconn v1.0.7
 )
 
@@ -20,6 +20,6 @@ require (
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/natefinch/lumberjack v2.0.0+incompatible // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
-	golang.org/x/sys v0.15.0 // indirect
+	golang.org/x/sys v0.16.0 // indirect
 	gopkg.in/guregu/null.v3 v3.5.0 // indirect
 )

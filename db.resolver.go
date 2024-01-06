@@ -10,7 +10,7 @@ import (
 	"github.com/sivaosorg/govm/logger"
 	"github.com/sivaosorg/govm/mysql"
 	"github.com/sivaosorg/govm/postgres"
-	"github.com/sivaosorg/mysqlconn"
+	"github.com/sivaosorg/msqlconn"
 	"github.com/sivaosorg/postgresconn"
 )
 
@@ -33,7 +33,7 @@ func (p *PostgresConnector) Connect() (*sql.DB, dbx.Dbx) {
 }
 
 func (m *MySQLConnector) Connect() (*sql.DB, dbx.Dbx) {
-	msql, s := mysqlconn.NewClient(m.Config)
+	msql, s := msqlconn.NewClient(m.Config)
 	return msql.GetConn(), s
 }
 
