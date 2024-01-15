@@ -3,7 +3,7 @@ module github.com/sivaosorg/db.resolver
 go 1.20
 
 require (
-	github.com/sivaosorg/govm v1.2.8
+	github.com/sivaosorg/govm v1.2.9
 	github.com/sivaosorg/msqlconn v1.0.7
 	github.com/sivaosorg/psqlconn v1.0.8
 )

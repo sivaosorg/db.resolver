@@ -33,8 +33,8 @@ github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZb
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/sirupsen/logrus v1.9.3 h1:dueUQJ1C2q9oE3F7wvmSGAaVtTmUizReu6fjN8uqzbQ=
 github.com/sirupsen/logrus v1.9.3/go.mod h1:naHLuLoDiP4jHNo9R0sCBMtWGeIprob74mVsIT4qYEQ=
-github.com/sivaosorg/govm v1.2.8 h1:SyVwq7PNUKQQNqI9PbjZ6zY9b33lks75y/qzAzxDNyI=
-github.com/sivaosorg/govm v1.2.8/go.mod h1:rXfPCNGc4ddPf1+VRX8Ytw/5xqehfPRrCr53Oi+cwpw=
+github.com/sivaosorg/govm v1.2.9 h1:r0s17KS/T9mgX//oDXGoghHNR2guhJnD6E0k6vpob2s=
+github.com/sivaosorg/govm v1.2.9/go.mod h1:rXfPCNGc4ddPf1+VRX8Ytw/5xqehfPRrCr53Oi+cwpw=
 github.com/sivaosorg/msqlconn v1.0.7 h1:kVUexnAxDK894eO2GZ3zH1YdkNjJvw1b0i5e9JFRtkI=
 github.com/sivaosorg/msqlconn v1.0.7/go.mod h1:94wMI4IhUJTpxUl4CBAF14d1pqoCajccbApxXd3qhQk=
 github.com/sivaosorg/psqlconn v1.0.8 h1:BMj9fqezGhNngbbobKUBjD7pIf6+APqFumdO1a37zPY=
